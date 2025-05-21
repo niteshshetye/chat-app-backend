@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 
 import { connectDB } from "./lib/db.js";
 import { authRoutes } from "./routes/auth.routes.js";
+import { messageRoutes } from "./routes/message.routes.js";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/message", messageRoutes);
 
 connectDB()
   .then(() => {

@@ -61,7 +61,7 @@ class AuthController {
             email: newUser.email,
             fullname: newUser.fullname,
             id: newUser._id,
-            profilePic: user.profilePic,
+            profilePic: user?.profilePic || "",
           },
           "User singup succesfully"
         )
