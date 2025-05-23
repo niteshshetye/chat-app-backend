@@ -161,7 +161,7 @@ class AuthController {
 
   checkAuth(req, res) {
     try {
-      return res.status(200).json(sendSuccessResponse());
+      return res.status(200).json(sendSuccessResponse({ data: req.user }));
     } catch (error) {
       return res
         .status(500)

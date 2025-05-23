@@ -10,7 +10,9 @@ routers
   .post("/login", authController.login)
   .post("/logout", authController.logout);
 
-routers.get("/profile", authController.getProfile);
+routers
+  .get("/profile", authMiddleware.protectedRoute, authController.getProfile)
+  .get("/check", authMiddleware.protectedRoute, authController.checkAuth);
 
 routers.put(
   "/update-profile",
