@@ -15,9 +15,7 @@ class MessageController {
 
       return res
         .status(200)
-        .json(
-          sendSuccessResponse({ data: users }, "Users Fetched Succesfully")
-        );
+        .json(sendSuccessResponse(users, "Users Fetched Succesfully"));
     } catch (error) {
       return res
         .status(500)
@@ -43,7 +41,7 @@ class MessageController {
 
       return res
         .status(200)
-        .json(sendSuccessResponse({ data: messages }, "Chats Fetched"));
+        .json(sendSuccessResponse(messages, "Chats Fetched"));
     } catch (error) {
       return res
         .status(500)
@@ -72,13 +70,11 @@ class MessageController {
       }
 
       const message = new Message(payload);
-      message.save();
+      await message.save();
 
       return res
         .status(201)
-        .json(
-          sendSuccessResponse({ data: message }, "Message Send Succesfully")
-        );
+        .json(sendSuccessResponse(message, "Message Send Succesfully"));
     } catch (error) {
       return res
         .status(500)

@@ -60,7 +60,7 @@ class AuthController {
           {
             email: newUser.email,
             fullname: newUser.fullname,
-            id: newUser._id,
+            _id: newUser._id,
             profilePic: user?.profilePic || "",
           },
           "User singup succesfully"
@@ -98,7 +98,7 @@ class AuthController {
       res.status(200).json(
         sendSuccessResponse(
           {
-            id: user._id,
+            _id: user._id,
             fullname: user.fullname,
             email: user.email,
             profilePic: user.profilePic,
@@ -156,12 +156,12 @@ class AuthController {
 
     res
       .status(200)
-      .json(sendSuccessResponse({ data: user }, "Profile Updated Succesfully"));
+      .json(sendSuccessResponse(user, "Profile Updated Succesfully"));
   }
 
   checkAuth(req, res) {
     try {
-      return res.status(200).json(sendSuccessResponse({ data: req.user }));
+      return res.status(200).json(sendSuccessResponse(req.user));
     } catch (error) {
       return res
         .status(500)
