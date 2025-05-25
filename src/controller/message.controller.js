@@ -1,7 +1,9 @@
 import { User } from "../models/user.model.js";
 import { Message } from "../models/message.model.js";
-import { sendErrorResponse, sendSuccessResponse } from "../utils/helper.js";
+
 import cloudinary from "../lib/cloudinary.js";
+import { getRecieverSockerId, io } from "../lib/socket.js";
+import { sendErrorResponse, sendSuccessResponse } from "../utils/helper.js";
 
 class MessageController {
   constructor() {}
@@ -71,6 +73,12 @@ class MessageController {
 
       const message = new Message(payload);
       await message.save();
+
+      const receiverSocketId = getRecieverSockerId(receiverId);
+
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit("newMessage", message);
+      }
 
       return res
         .status(201)

@@ -5,10 +5,9 @@ import express from "express";
 import cookieParser from "cookie-parser";
 
 import { connectDB } from "./lib/db.js";
+import { server, app, io } from "./lib/socket.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { messageRoutes } from "./routes/message.routes.js";
-
-const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -26,7 +25,7 @@ connectDB()
   .then(() => {
     const port = process.env.PORT || 8001;
 
-    app.listen(port, () => {
+    server.listen(port, () => {
       console.log(`Server is up on http://localhost:${port}`);
     });
   })
